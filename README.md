@@ -36,3 +36,11 @@ fifth thing to do
 * ativate the layout
 * run this on console bin\cake TwitterBootstrap.publish all
 * now we have the layout files at src\template\element
+
+_________
+
+sixth thing to do
+
+* initiate the migrations database
+* run bin\cake kabe migration TableName to create your tables  
+* go to config\migrations and you will be able to personalize your tables following the rules of Migration`s Development
