@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateCategoriesProducts extends AbstractMigration
+class CreateStockIn extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,13 +12,12 @@ class CreateCategoriesProducts extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('categories_products');
-        $table->addColumn('category_id', 'integer');
+        $table = $this->table('stock_in');
         $table->addColumn('product_id', 'integer');
-        $table->addForeignKey('category_id', 'categories', 'id');
+        $table->addColumn('quantity', 'integer');
+        $table->addColumn('created', 'datetime');
+        $table->addColumn('modified', 'datetime');
         $table->addForeignKey('product_id', 'products', 'id');
         $table->create();
     }
 }
-
-

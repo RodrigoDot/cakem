@@ -43,4 +43,18 @@ sixth thing to do
 
 * initiate the migrations database
 * run bin\cake kabe migration TableName to create your tables  
-* go to config\migrations and you will be able to personalize your tables following the rules of Migration`s Development
+* go to config\migrations and you will be able to personalize your tables following the rules of Migration's Development
+
+
+seventh thing to do
+
+* generate the files of your migration tables
+* run bin\cake migrations migrate
+* NOW YOU HAVE YOUR DATABASE COMPLETE
+
+--------
+
+eighth thing to do 
+
+* now you can run the bake to create your CRUD using bin\cake bake all NOMETATABELA or do it yourself
+* OBS to create your CRUD using the twitterbootstrap you must run bin\cake bake all NOMETATABELA --theme TwitterBootstrap

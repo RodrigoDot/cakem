@@ -16,10 +16,10 @@ class CreateProducts extends AbstractMigration
         $table->addColumn('title' , 'string', [
             'limit'=>100 
         ]);
-        $table->addColumn('price', 'decimal', {
+        $table->addColumn('price', 'decimal', [
             'precision'=>11,
             'scale'=>2
-        });
+        ]);
         $table->addColumn('cost', 'decimal', [
             'precision'=>11,
             'scale'=>2
