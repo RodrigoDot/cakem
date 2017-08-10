@@ -7,11 +7,13 @@ use Cake\ORM\Entity;
  * Category Entity
  *
  * @property int $id
+ * @property int $user_id
  * @property string $title
  * @property string $url
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Product[] $products
  */
 class Category extends Entity

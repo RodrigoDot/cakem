@@ -5,9 +5,24 @@
                 <h3 class="box-title"><?= __('Actions') ?></h3>
             </div>
             <ul class="nav nav-pills nav-stacked">
-                <li><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $product->id],
-                        ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)])?></li>  
-            </ul>
+                        <li><?= $this->Form->postLink(
+                        __('Delete'),
+                        ['action' => 'delete', $product->id],
+                        ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)]
+                    )
+                ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Products'), ['action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Stock'), ['controller' => 'Stock', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'Stock'), ['controller' => 'Stock', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Stock In'), ['controller' => 'StockIn', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'Stock In'), ['controller' => 'StockIn', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Stock Out'), ['controller' => 'StockOut', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'Stock Out'), ['controller' => 'StockOut', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
+                    </ul>
         </div>
     </div>
     <div class="products col-lg-10 col-md-9">
@@ -19,6 +34,7 @@
                 <?= $this->Form->create($product) ?>
                 <fieldset>
                     <?php
+                                    echo $this->Form->input('user_id', ['options' => $users]);
                                     echo $this->Form->input('title');
                                     echo $this->Form->input('price');
                                     echo $this->Form->input('cost');

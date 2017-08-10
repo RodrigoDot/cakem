@@ -21,7 +21,7 @@ class CategoriesProductsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Categories', 'Products']
+            'contain' => ['Users', 'Categories', 'Products']
         ];
         $categoriesProducts = $this->paginate($this->CategoriesProducts);
 
@@ -39,7 +39,7 @@ class CategoriesProductsController extends AppController
     public function view($id = null)
     {
         $categoriesProduct = $this->CategoriesProducts->get($id, [
-            'contain' => ['Categories', 'Products']
+            'contain' => ['Users', 'Categories', 'Products']
         ]);
 
         $this->set('categoriesProduct', $categoriesProduct);
@@ -63,9 +63,10 @@ class CategoriesProductsController extends AppController
             }
             $this->Flash->error(__('The categories product could not be saved. Please, try again.'));
         }
+        $users = $this->CategoriesProducts->Users->find('list', ['limit' => 200]);
         $categories = $this->CategoriesProducts->Categories->find('list', ['limit' => 200]);
         $products = $this->CategoriesProducts->Products->find('list', ['limit' => 200]);
-        $this->set(compact('categoriesProduct', 'categories', 'products'));
+        $this->set(compact('categoriesProduct', 'users', 'categories', 'products'));
         $this->set('_serialize', ['categoriesProduct']);
     }
 
@@ -90,9 +91,10 @@ class CategoriesProductsController extends AppController
             }
             $this->Flash->error(__('The categories product could not be saved. Please, try again.'));
         }
+        $users = $this->CategoriesProducts->Users->find('list', ['limit' => 200]);
         $categories = $this->CategoriesProducts->Categories->find('list', ['limit' => 200]);
         $products = $this->CategoriesProducts->Products->find('list', ['limit' => 200]);
-        $this->set(compact('categoriesProduct', 'categories', 'products'));
+        $this->set(compact('categoriesProduct', 'users', 'categories', 'products'));
         $this->set('_serialize', ['categoriesProduct']);
     }
 

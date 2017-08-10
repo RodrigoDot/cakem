@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * Product Entity
  *
  * @property int $id
+ * @property int $user_id
  * @property string $title
  * @property float $price
  * @property float $cost
@@ -16,6 +17,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Stock[] $stock
  * @property \App\Model\Entity\StockIn[] $stock_in
  * @property \App\Model\Entity\StockOut[] $stock_out

@@ -33,12 +33,12 @@
 
   <!-- Sidebar Menu -->
   <ul class="sidebar-menu">
-    <li class="header">HEADER</li>
+    <li class="header">Navegação</li>
     <!-- Optionally, you can add icons to the links -->
-    <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-    <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-    <li class="treeview">
-      <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+    <li class="active"><a href="/categories"><i class="fa fa-link"></i> <span><?php echo __('Categories'); ?></span></a></li>
+    <li class="active"><a href="/stock-in"><i class="fa fa-link"></i> <span><?php echo __('Stock In'); ?></span></a></li>
+    <li class="active"><a href="/stock-out"><i class="fa fa-link"></i> <span><?php echo __('Stock Out'); ?></span></a></li>
+    <li class="active"><a href="/products"><i class="fa fa-link"></i> <span><?php echo __('Products'); ?></span></a></li>
       <ul class="treeview-menu">
         <li><a href="#">Link in level 2</a></li>
         <li><a href="#">Link in level 2</a></li>

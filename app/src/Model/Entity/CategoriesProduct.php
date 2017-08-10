@@ -7,9 +7,11 @@ use Cake\ORM\Entity;
  * CategoriesProduct Entity
  *
  * @property int $id
+ * @property int $user_id
  * @property int $category_id
  * @property int $product_id
  *
+ * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Category $category
  * @property \App\Model\Entity\Product $product
  */

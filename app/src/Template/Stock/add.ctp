@@ -6,6 +6,8 @@
             </div>
             <ul class="nav nav-pills nav-stacked">
                         <li><?= $this->Html->link(__('List {0}', 'Stock'), ['action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
                         <li><?= $this->Html->link(__('List {0}', 'Products'), ['controller' => 'Products', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New {0}', 'Product'), ['controller' => 'Products', 'action' => 'add']) ?></li>
                     </ul>
@@ -20,6 +22,7 @@
                 <?= $this->Form->create($stock) ?>
                 <fieldset>
                     <?php
+                                    echo $this->Form->input('user_id', ['options' => $users]);
                                     echo $this->Form->input('product_id', ['options' => $products]);
                                     echo $this->Form->input('decimal');
                                     echo $this->Form->input('unit_price');

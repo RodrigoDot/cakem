@@ -13,6 +13,7 @@ class CreateCategories extends AbstractMigration
     public function change()
     {
         $table = $this->table('categories');
+        $table->addColumn('user_id', 'integer');
         $table->addColumn('title', 'string', [
             'limit'=>100
         ]);
@@ -21,6 +22,7 @@ class CreateCategories extends AbstractMigration
         ]);
         $table->addColumn('created', 'datetime');
         $table->addColumn('modified', 'datetime');
+        $table->addForeignKey('user_id', 'users', 'id');
         $table->create();
     }
 }

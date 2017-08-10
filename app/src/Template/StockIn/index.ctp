@@ -7,6 +7,8 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li><?= $this->Html->link(__('New {0}', ['Stock In']), ['action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?></li>
                         <li><?= $this->Html->link(__('List {0}', ['Products']), ['controller' => 'Products', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New {0}', ['Product']), ['controller' => 'Products', 'action' => 'add']) ?></li>
                     </ul>
@@ -22,6 +24,7 @@
                     <thead>
                         <tr>
                                         <th><?= $this->Paginator->sort('id') ?></th>
+                                        <th><?= $this->Paginator->sort('user_id') ?></th>
                                         <th><?= $this->Paginator->sort('product_id') ?></th>
                                         <th><?= $this->Paginator->sort('quantity') ?></th>
                                         <th><?= $this->Paginator->sort('created') ?></th>
@@ -33,6 +36,7 @@
                         <?php foreach ($stockIn as $stockIn): ?>
                         <tr>
                                         <td><?= $this->Number->format($stockIn->id) ?></td>
+                                        <td><?= $stockIn->has('user') ? $this->Html->link($stockIn->user->name, ['controller' => 'Users', 'action' => 'view', $stockIn->user->id]) : '' ?></td>
                                         <td><?= $stockIn->has('product') ? $this->Html->link($stockIn->product->title, ['controller' => 'Products', 'action' => 'view', $stockIn->product->id]) : '' ?></td>
                                         <td><?= $this->Number->format($stockIn->quantity) ?></td>
                                         <td><?= h($stockIn->created) ?></td>

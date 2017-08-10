@@ -13,6 +13,7 @@ class CreateProducts extends AbstractMigration
     public function change()
     {
         $table = $this->table('products');
+        $table->addColumn('user_id', 'integer');
         $table->addColumn('title' , 'string', [
             'limit'=>100 
         ]);
@@ -36,6 +37,7 @@ class CreateProducts extends AbstractMigration
         ]);
         $table->addColumn('created', 'datetime');
         $table->addColumn('modified', 'datetime');
+        $table->addForeignKey('user_id', 'users', 'id');
         $table->create();
     }
 }

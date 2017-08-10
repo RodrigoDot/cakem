@@ -9,6 +9,8 @@
                 <li><?= $this->Form->postLink(__('Delete {0}', ['Categories Product']), ['action' => 'delete', $categoriesProduct->id], ['confirm' => __('Are you sure you want to delete # {0}?', $categoriesProduct->id)]) ?> </li>
                 <li><?= $this->Html->link(__('List {0}', ['Categories Products']), ['action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Categories Product']), ['action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?> </li>
                         <li><?= $this->Html->link(__('List {0}', ['Categories']), ['controller' => 'Categories', 'action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Category']), ['controller' => 'Categories', 'action' => 'add']) ?> </li>
                         <li><?= $this->Html->link(__('List {0}', ['Products']), ['controller' => 'Products', 'action' => 'index']) ?> </li>
@@ -23,6 +25,10 @@
             </div>
             <div class="box-body">
                 <table class="table table-striped table-hover">
+                                                        <tr>
+                        <th>User</th>
+                        <td><?= $categoriesProduct->has('user') ? $this->Html->link($categoriesProduct->user->name, ['controller' => 'Users', 'action' => 'view', $categoriesProduct->user->id]) : '' ?></td>
+                    </tr>
                                                         <tr>
                         <th>Category</th>
                         <td><?= $categoriesProduct->has('category') ? $this->Html->link($categoriesProduct->category->title, ['controller' => 'Categories', 'action' => 'view', $categoriesProduct->category->id]) : '' ?></td>

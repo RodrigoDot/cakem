@@ -17,10 +17,11 @@ class StockControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.stock',
+        'app.users',
+        'app.categories',
         'app.products',
         'app.stock_in',
         'app.stock_out',
-        'app.categories',
         'app.categories_products'
     ];
 

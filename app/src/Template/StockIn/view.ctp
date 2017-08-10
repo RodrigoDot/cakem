@@ -9,6 +9,8 @@
                 <li><?= $this->Form->postLink(__('Delete {0}', ['Stock In']), ['action' => 'delete', $stockIn->id], ['confirm' => __('Are you sure you want to delete # {0}?', $stockIn->id)]) ?> </li>
                 <li><?= $this->Html->link(__('List {0}', ['Stock In']), ['action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Stock In']), ['action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?> </li>
                         <li><?= $this->Html->link(__('List {0}', ['Products']), ['controller' => 'Products', 'action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Product']), ['controller' => 'Products', 'action' => 'add']) ?> </li>
                     </ul>
@@ -21,6 +23,10 @@
             </div>
             <div class="box-body">
                 <table class="table table-striped table-hover">
+                                                        <tr>
+                        <th>User</th>
+                        <td><?= $stockIn->has('user') ? $this->Html->link($stockIn->user->name, ['controller' => 'Users', 'action' => 'view', $stockIn->user->id]) : '' ?></td>
+                    </tr>
                                                         <tr>
                         <th>Product</th>
                         <td><?= $stockIn->has('product') ? $this->Html->link($stockIn->product->title, ['controller' => 'Products', 'action' => 'view', $stockIn->product->id]) : '' ?></td>

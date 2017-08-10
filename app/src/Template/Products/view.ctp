@@ -9,7 +9,17 @@
                 <li><?= $this->Form->postLink(__('Delete {0}', ['Product']), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)]) ?> </li>
                 <li><?= $this->Html->link(__('List {0}', ['Products']), ['action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Product']), ['action' => 'add']) ?> </li>
-            </ul>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Stock']), ['controller' => 'Stock', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['Stock']), ['controller' => 'Stock', 'action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Stock In']), ['controller' => 'StockIn', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['Stock In']), ['controller' => 'StockIn', 'action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Stock Out']), ['controller' => 'StockOut', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['Stock Out']), ['controller' => 'StockOut', 'action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Categories']), ['controller' => 'Categories', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['Category']), ['controller' => 'Categories', 'action' => 'add']) ?> </li>
+                    </ul>
         </div>
     </div>
     <div class="products col-lg-10 col-md-9">
@@ -19,6 +29,10 @@
             </div>
             <div class="box-body">
                 <table class="table table-striped table-hover">
+                                                        <tr>
+                        <th>User</th>
+                        <td><?= $product->has('user') ? $this->Html->link($product->user->name, ['controller' => 'Users', 'action' => 'view', $product->user->id]) : '' ?></td>
+                    </tr>
                                                         <tr>
                         <th>Title</th>
                         <td><?= h($product->title) ?></td>
@@ -62,6 +76,7 @@
                     <table class="table table-striped table-hover">
                         <tr>
                                         <th>Id</th>
+                                        <th>User Id</th>
                                         <th>Product Id</th>
                                         <th>Decimal</th>
                                         <th>Unit Price</th>
@@ -73,6 +88,7 @@
                         <?php foreach ($product->stock as $stock): ?>
                         <tr>
                             <td><?= h($stock->id) ?></td>
+                            <td><?= h($stock->user_id) ?></td>
                             <td><?= h($stock->product_id) ?></td>
                             <td><?= h($stock->decimal) ?></td>
                             <td><?= h($stock->unit_price) ?></td>
@@ -95,6 +111,7 @@
                     <table class="table table-striped table-hover">
                         <tr>
                                         <th>Id</th>
+                                        <th>User Id</th>
                                         <th>Product Id</th>
                                         <th>Quantity</th>
                                         <th>Created</th>
@@ -104,6 +121,7 @@
                         <?php foreach ($product->stock_in as $stockIn): ?>
                         <tr>
                             <td><?= h($stockIn->id) ?></td>
+                            <td><?= h($stockIn->user_id) ?></td>
                             <td><?= h($stockIn->product_id) ?></td>
                             <td><?= h($stockIn->quantity) ?></td>
                             <td><?= h($stockIn->created) ?></td>
@@ -124,6 +142,7 @@
                     <table class="table table-striped table-hover">
                         <tr>
                                         <th>Id</th>
+                                        <th>User Id</th>
                                         <th>Product Id</th>
                                         <th>Quantity</th>
                                         <th>Created</th>
@@ -133,6 +152,7 @@
                         <?php foreach ($product->stock_out as $stockOut): ?>
                         <tr>
                             <td><?= h($stockOut->id) ?></td>
+                            <td><?= h($stockOut->user_id) ?></td>
                             <td><?= h($stockOut->product_id) ?></td>
                             <td><?= h($stockOut->quantity) ?></td>
                             <td><?= h($stockOut->created) ?></td>
@@ -153,6 +173,7 @@
                     <table class="table table-striped table-hover">
                         <tr>
                                         <th>Id</th>
+                                        <th>User Id</th>
                                         <th>Title</th>
                                         <th>Url</th>
                                         <th>Created</th>
@@ -162,6 +183,7 @@
                         <?php foreach ($product->categories as $categories): ?>
                         <tr>
                             <td><?= h($categories->id) ?></td>
+                            <td><?= h($categories->user_id) ?></td>
                             <td><?= h($categories->title) ?></td>
                             <td><?= h($categories->url) ?></td>
                             <td><?= h($categories->created) ?></td>

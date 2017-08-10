@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * StockIn Model
  *
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ProductsTable|\Cake\ORM\Association\BelongsTo $Products
  *
  * @method \App\Model\Entity\StockIn get($primaryKey, $options = [])
@@ -40,6 +41,10 @@ class StockInTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Products', [
             'foreignKey' => 'product_id',
             'joinType' => 'INNER'
@@ -75,6 +80,7 @@ class StockInTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['product_id'], 'Products'));
 
         return $rules;

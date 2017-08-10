@@ -17,11 +17,12 @@ class CategoriesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.categories',
+        'app.users',
+        'app.categories_products',
         'app.products',
         'app.stock',
         'app.stock_in',
-        'app.stock_out',
-        'app.categories_products'
+        'app.stock_out'
     ];
 
     /**

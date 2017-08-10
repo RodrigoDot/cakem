@@ -21,7 +21,7 @@ class StockController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Products']
+            'contain' => ['Users', 'Products']
         ];
         $stock = $this->paginate($this->Stock);
 
@@ -39,7 +39,7 @@ class StockController extends AppController
     public function view($id = null)
     {
         $stock = $this->Stock->get($id, [
-            'contain' => ['Products']
+            'contain' => ['Users', 'Products']
         ]);
 
         $this->set('stock', $stock);
@@ -63,8 +63,9 @@ class StockController extends AppController
             }
             $this->Flash->error(__('The stock could not be saved. Please, try again.'));
         }
+        $users = $this->Stock->Users->find('list', ['limit' => 200]);
         $products = $this->Stock->Products->find('list', ['limit' => 200]);
-        $this->set(compact('stock', 'products'));
+        $this->set(compact('stock', 'users', 'products'));
         $this->set('_serialize', ['stock']);
     }
 
@@ -89,8 +90,9 @@ class StockController extends AppController
             }
             $this->Flash->error(__('The stock could not be saved. Please, try again.'));
         }
+        $users = $this->Stock->Users->find('list', ['limit' => 200]);
         $products = $this->Stock->Products->find('list', ['limit' => 200]);
-        $this->set(compact('stock', 'products'));
+        $this->set(compact('stock', 'users', 'products'));
         $this->set('_serialize', ['stock']);
     }
 

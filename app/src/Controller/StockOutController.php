@@ -21,7 +21,7 @@ class StockOutController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Products']
+            'contain' => ['Users', 'Products']
         ];
         $stockOut = $this->paginate($this->StockOut);
 
@@ -39,7 +39,7 @@ class StockOutController extends AppController
     public function view($id = null)
     {
         $stockOut = $this->StockOut->get($id, [
-            'contain' => ['Products']
+            'contain' => ['Users', 'Products']
         ]);
 
         $this->set('stockOut', $stockOut);
@@ -63,8 +63,9 @@ class StockOutController extends AppController
             }
             $this->Flash->error(__('The stock out could not be saved. Please, try again.'));
         }
+        $users = $this->StockOut->Users->find('list', ['limit' => 200]);
         $products = $this->StockOut->Products->find('list', ['limit' => 200]);
-        $this->set(compact('stockOut', 'products'));
+        $this->set(compact('stockOut', 'users', 'products'));
         $this->set('_serialize', ['stockOut']);
     }
 
@@ -89,8 +90,9 @@ class StockOutController extends AppController
             }
             $this->Flash->error(__('The stock out could not be saved. Please, try again.'));
         }
+        $users = $this->StockOut->Users->find('list', ['limit' => 200]);
         $products = $this->StockOut->Products->find('list', ['limit' => 200]);
-        $this->set(compact('stockOut', 'products'));
+        $this->set(compact('stockOut', 'users', 'products'));
         $this->set('_serialize', ['stockOut']);
     }
 

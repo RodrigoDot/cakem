@@ -6,8 +6,18 @@
             </div>
 
             <ul class="nav nav-pills nav-stacked">
-                <li><?= $this->Html->link(__('New {0}', ['Product']), ['action' => 'add']) ?></li> 
-            </ul>
+                <li><?= $this->Html->link(__('New {0}', ['Product']), ['action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Stock']), ['controller' => 'Stock', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['Stock']), ['controller' => 'Stock', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Stock In']), ['controller' => 'StockIn', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['Stock In']), ['controller' => 'StockIn', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Stock Out']), ['controller' => 'StockOut', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['Stock Out']), ['controller' => 'StockOut', 'action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Categories']), ['controller' => 'Categories', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['Category']), ['controller' => 'Categories', 'action' => 'add']) ?></li>
+                    </ul>
         </div>
     </div>
     <div class="products col-md-10">
@@ -20,12 +30,12 @@
                     <thead>
                         <tr>
                                         <th><?= $this->Paginator->sort('id') ?></th>
+                                        <th><?= $this->Paginator->sort('user_id') ?></th>
                                         <th><?= $this->Paginator->sort('title') ?></th>
                                         <th><?= $this->Paginator->sort('price') ?></th>
                                         <th><?= $this->Paginator->sort('cost') ?></th>
                                         <th><?= $this->Paginator->sort('status') ?></th>
                                         <th><?= $this->Paginator->sort('alert_price') ?></th>
-                                        <th><?= $this->Paginator->sort('created') ?></th>
                                         <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
@@ -33,12 +43,12 @@
                         <?php foreach ($products as $product): ?>
                         <tr>
                                         <td><?= $this->Number->format($product->id) ?></td>
+                                        <td><?= $product->has('user') ? $this->Html->link($product->user->name, ['controller' => 'Users', 'action' => 'view', $product->user->id]) : '' ?></td>
                                         <td><?= h($product->title) ?></td>
                                         <td><?= $this->Number->format($product->price) ?></td>
                                         <td><?= $this->Number->format($product->cost) ?></td>
                                         <td><?= $this->Number->format($product->status) ?></td>
                                         <td><?= $this->Number->format($product->alert_price) ?></td>
-                                        <td><?= h($product->created) ?></td>
                                         <td class="actions" style="white-space:nowrap">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $product->id], ['class'=>'btn btn-default btn-xs']) ?>
                                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->id], ['class'=>'btn btn-primary btn-xs']) ?>

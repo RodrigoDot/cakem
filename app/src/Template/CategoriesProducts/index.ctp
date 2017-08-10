@@ -7,6 +7,8 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li><?= $this->Html->link(__('New {0}', ['Categories Product']), ['action' => 'add']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?></li>
                         <li><?= $this->Html->link(__('List {0}', ['Categories']), ['controller' => 'Categories', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New {0}', ['Category']), ['controller' => 'Categories', 'action' => 'add']) ?></li>
                         <li><?= $this->Html->link(__('List {0}', ['Products']), ['controller' => 'Products', 'action' => 'index']) ?></li>
@@ -24,6 +26,7 @@
                     <thead>
                         <tr>
                                         <th><?= $this->Paginator->sort('id') ?></th>
+                                        <th><?= $this->Paginator->sort('user_id') ?></th>
                                         <th><?= $this->Paginator->sort('category_id') ?></th>
                                         <th><?= $this->Paginator->sort('product_id') ?></th>
                                         <th class="actions"><?= __('Actions') ?></th>
@@ -33,6 +36,7 @@
                         <?php foreach ($categoriesProducts as $categoriesProduct): ?>
                         <tr>
                                         <td><?= $this->Number->format($categoriesProduct->id) ?></td>
+                                        <td><?= $categoriesProduct->has('user') ? $this->Html->link($categoriesProduct->user->name, ['controller' => 'Users', 'action' => 'view', $categoriesProduct->user->id]) : '' ?></td>
                                         <td><?= $categoriesProduct->has('category') ? $this->Html->link($categoriesProduct->category->title, ['controller' => 'Categories', 'action' => 'view', $categoriesProduct->category->id]) : '' ?></td>
                                         <td><?= $categoriesProduct->has('product') ? $this->Html->link($categoriesProduct->product->title, ['controller' => 'Products', 'action' => 'view', $categoriesProduct->product->id]) : '' ?></td>
                                         <td class="actions" style="white-space:nowrap">

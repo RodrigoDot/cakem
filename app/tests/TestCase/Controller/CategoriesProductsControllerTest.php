@@ -17,6 +17,7 @@ class CategoriesProductsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.categories_products',
+        'app.users',
         'app.categories',
         'app.products',
         'app.stock',

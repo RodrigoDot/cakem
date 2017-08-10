@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateStock extends AbstractMigration
+class CreateStockIn extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,20 +12,14 @@ class CreateStock extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('stock');
+        $table = $this->table('stock_in');
+        $table->addColumn('user_id', 'integer');
         $table->addColumn('product_id', 'integer');
-        $table->addColumn('decimal', 'integer');
-        $table->addColumn('unit_price', 'decimal', [
-            'precision'=>11,
-            'scale'=>2
-        ]);
-        $table->addColumn('unit_cost', 'decimal', [
-            'precision'=>11,
-            'scale'=>2
-        ]);
+        $table->addColumn('quantity', 'integer');
         $table->addColumn('created', 'datetime');
         $table->addColumn('modified', 'datetime');
         $table->addForeignKey('product_id', 'products', 'id');
+        $table->addForeignKey('user_id', 'users', 'id');
         $table->create();
     }
 }

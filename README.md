@@ -42,7 +42,7 @@ _________
 sixth thing to do
 
 * initiate the migrations database
-* run bin\cake kabe migration TableName to create your tables  
+* run bin\cake bake migration TableName to create your tables  
 * go to config\migrations and you will be able to personalize your tables following the rules of Migration's Development
 
 
@@ -58,3 +58,23 @@ eighth thing to do
 
 * now you can run the bake to create your CRUD using bin\cake bake all NOMETATABELA or do it yourself
 * OBS to create your CRUD using the twitterbootstrap you must run bin\cake bake all NOMETATABELA --theme TwitterBootstrap
+
+nineth thing to do
+
+* run the follow code bin\cake i18n extract
+* the cake will catch every sentence into a __() 
+* go to src\LOCALE and create a directory that will keep the new language ex.: pt_BR
+* copy the file default.pot and put it on the directory created previously like dafault.po without the last T of .pot
+* you can edit whatever you want to translate puttin it into a __('stringHere)
+* to set this on your system 
+* go to config\app.php
+* on App=>defaultLocale you must edit the filed ex.: pt_BR and put the name of your language
+
+10th thing to do
+
+
+
+
+
+
+

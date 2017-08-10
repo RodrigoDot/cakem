@@ -9,6 +9,8 @@
                 <li><?= $this->Form->postLink(__('Delete {0}', ['Category']), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?> </li>
                 <li><?= $this->Html->link(__('List {0}', ['Categories']), ['action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Category']), ['action' => 'add']) ?> </li>
+                        <li><?= $this->Html->link(__('List {0}', ['Users']), ['controller' => 'Users', 'action' => 'index']) ?> </li>
+                <li><?= $this->Html->link(__('New {0}', ['User']), ['controller' => 'Users', 'action' => 'add']) ?> </li>
                         <li><?= $this->Html->link(__('List {0}', ['Products']), ['controller' => 'Products', 'action' => 'index']) ?> </li>
                 <li><?= $this->Html->link(__('New {0}', ['Product']), ['controller' => 'Products', 'action' => 'add']) ?> </li>
                     </ul>
@@ -21,6 +23,10 @@
             </div>
             <div class="box-body">
                 <table class="table table-striped table-hover">
+                                                        <tr>
+                        <th>User</th>
+                        <td><?= $category->has('user') ? $this->Html->link($category->user->name, ['controller' => 'Users', 'action' => 'view', $category->user->id]) : '' ?></td>
+                    </tr>
                                                         <tr>
                         <th>Title</th>
                         <td><?= h($category->title) ?></td>
@@ -48,6 +54,7 @@
                     <table class="table table-striped table-hover">
                         <tr>
                                         <th>Id</th>
+                                        <th>User Id</th>
                                         <th>Title</th>
                                         <th>Price</th>
                                         <th>Cost</th>
@@ -61,6 +68,7 @@
                         <?php foreach ($category->products as $products): ?>
                         <tr>
                             <td><?= h($products->id) ?></td>
+                            <td><?= h($products->user_id) ?></td>
                             <td><?= h($products->title) ?></td>
                             <td><?= h($products->price) ?></td>
                             <td><?= h($products->cost) ?></td>

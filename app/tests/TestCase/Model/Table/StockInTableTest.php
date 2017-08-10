@@ -25,10 +25,11 @@ class StockInTableTest extends TestCase
      */
     public $fixtures = [
         'app.stock_in',
+        'app.users',
+        'app.categories',
         'app.products',
         'app.stock',
         'app.stock_out',
-        'app.categories',
         'app.categories_products'
     ];
 
