@@ -16,6 +16,8 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\View\Helper\SessionHelper;
+
 
 /**
  * Application Controller
@@ -36,14 +38,23 @@ class AppController extends Controller
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
-     */
+     */ 
     public function initialize()
     {
         parent::initialize();
-
+        
+        $this->loadComponent('Auth', [
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ]
+        ]);
+                
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
+        
+        
+        
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -63,10 +74,35 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+        parent::beforeRender($event);
+        
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
+        
+        $this->set('Auth', $this->Auth);
+        //$this->Auth->user('username');
+       
     }
+    
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add']);
+    }   
+    
 }
+
+
+/**
+
+enviar dados para a view
+In View:
+
+$this->request->session()->read('Auth.User.username')
+
+In Controller
+
+$this->Auth->user('username');
+*/

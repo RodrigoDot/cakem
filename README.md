@@ -72,6 +72,11 @@ nineth thing to do
 
 10th thing to do
 
+* to use data from the auth on the views
+
+No AppController    >>  $this->set('Auth', $this->Auth);
+Na View             >>  <?= $Auth->user('name') ?>
+
 
 
 

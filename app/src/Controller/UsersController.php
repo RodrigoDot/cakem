@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Users Controller
@@ -18,14 +19,51 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
+    public function initialize() {
+        parent::initialize();
+    }
+    
+    public function logout() {
+        $this->Flash->success('Voce nao esta mais logado');
+        return $this->redirect($this->Auth->logout());
+    }
+    
+    
+    public function login () {
+        if($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if($user) {
+                $this->Auth->setUser($user);
+                if($user['access'] == 'admin'){
+                return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
+                } else {
+                    return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'indexUser'])); 
+                }
+            }
+            $this->Flash->error('Nao foi possivel fazer login, usuario ou senha invalidos');
+        }
+    }    
+    
     public function index()
     {
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
+        $this->set('userName', 'teste');
+        if($this->Auth->user('access') == 'admin') {
+            $users = $this->paginate($this->Users);
+            $this->set(compact('users'));
+            $this->set('_serialize', ['users']);
+        } else {
+            return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'indexUser'])); 
+        }
     }
 
+    public function indexUser()
+    {
+        $userId = $this->Auth->user('id');
+        $user = $this->Users->get($userId);
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
     /**
      * View method
      *
@@ -35,6 +73,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+        
         $user = $this->Users->get($id, [
             'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut']
         ]);
@@ -51,6 +90,7 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEntity();
+        
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -105,7 +145,11 @@ class UsersController extends AppController
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
+    }
+    
+    public function beforeFilter(Event $event) {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add']);
     }
 }

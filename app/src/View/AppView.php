@@ -14,6 +14,7 @@
 namespace App\View;
 
 use Cake\View\View;
+use Cake\Auth\Helper;
 
 /**
  * Application View
@@ -36,6 +37,7 @@ class AppView extends View
      */
     public function initialize()
     {
-        $this->LoadHelper('Form', ['className'=>'TwitterBootstrap.Form']);        
+        $this->LoadHelper('Form', ['className'=>'TwitterBootstrap.Form']); 
+        $this->loadHelper('AuthView');
     }
 }
