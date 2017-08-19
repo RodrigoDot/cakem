@@ -38,12 +38,18 @@ class CategoriesController extends AppController
      */
     public function view($id = null)
     {
-        $category = $this->Categories->get($id, [
-            'contain' => ['Users', 'Products']
-        ]);
+        $access = $this->RouterValidator->validate($this->Auth->user('role'));
+        if($access) {
+            $category = $this->Categories->get($id, [
+                'contain' => ['Users', 'Products']
+            ]);
 
-        $this->set('category', $category);
-        $this->set('_serialize', ['category']);
+            $this->set('category', $category);
+            $this->set('_serialize', ['category']);
+        } else {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao tem permissao para acessar essa pagina');
+        }
     }
 
     /**
@@ -53,20 +59,26 @@ class CategoriesController extends AppController
      */
     public function add()
     {
-        $category = $this->Categories->newEntity();
-        if ($this->request->is('post')) {
-            $category = $this->Categories->patchEntity($category, $this->request->getData());
-            if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
+        $access = $this->RouterValidator->validate($this->Auth->user('role'));
+        if($access) {
+            $category = $this->Categories->newEntity();
+            if ($this->request->is('post')) {
+                $category = $this->Categories->patchEntity($category, $this->request->getData());
+                if ($this->Categories->save($category)) {
+                    $this->Flash->success(__('The category has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The category could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The category could not be saved. Please, try again.'));
+            $users = $this->Categories->Users->find('list', ['limit' => 200]);
+            $products = $this->Categories->Products->find('list', ['limit' => 200]);
+            $this->set(compact('category', 'users', 'products'));
+            $this->set('_serialize', ['category']);            
+        } else {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao tem permissao para acessar essa pagina');
         }
-        $users = $this->Categories->Users->find('list', ['limit' => 200]);
-        $products = $this->Categories->Products->find('list', ['limit' => 200]);
-        $this->set(compact('category', 'users', 'products'));
-        $this->set('_serialize', ['category']);
     }
 
     /**
@@ -78,22 +90,28 @@ class CategoriesController extends AppController
      */
     public function edit($id = null)
     {
-        $category = $this->Categories->get($id, [
-            'contain' => ['Products']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $category = $this->Categories->patchEntity($category, $this->request->getData());
-            if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
+        $access = $this->RouterValidator->validate($this->Auth->user('role'));
+        if($access) {
+            $category = $this->Categories->get($id, [
+                'contain' => ['Products']
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $category = $this->Categories->patchEntity($category, $this->request->getData());
+                if ($this->Categories->save($category)) {
+                    $this->Flash->success(__('The category has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The category could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The category could not be saved. Please, try again.'));
+            $users = $this->Categories->Users->find('list', ['limit' => 200]);
+            $products = $this->Categories->Products->find('list', ['limit' => 200]);
+            $this->set(compact('category', 'users', 'products'));
+            $this->set('_serialize', ['category']);
+        } else {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao tem permissao para acessar essa pagina');
         }
-        $users = $this->Categories->Users->find('list', ['limit' => 200]);
-        $products = $this->Categories->Products->find('list', ['limit' => 200]);
-        $this->set(compact('category', 'users', 'products'));
-        $this->set('_serialize', ['category']);
     }
 
     /**
@@ -105,14 +123,26 @@ class CategoriesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $category = $this->Categories->get($id);
-        if ($this->Categories->delete($category)) {
-            $this->Flash->success(__('The category has been deleted.'));
-        } else {
-            $this->Flash->error(__('The category could not be deleted. Please, try again.'));
-        }
+        $access = $this->RouterValidator->validate($this->Auth->user('role'));
+        if($access) {
+            $this->request->allowMethod(['post', 'delete']);
+            $category = $this->Categories->get($id);
+            if ($this->Categories->delete($category)) {
+                $this->Flash->success(__('The category has been deleted.'));
+            } else {
+                $this->Flash->error(__('The category could not be deleted. Please, try again.'));
+            }
 
-        return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'index']);            
+        } else {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao tem permissao para acessar essa pagina');
+        }
     }
+    
+    public function beforeRender() {
+        $this->Auth->isAuthorized();
+    }
+    
+    
 }

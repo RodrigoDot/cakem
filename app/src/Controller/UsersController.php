@@ -35,8 +35,11 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if($user) {
                 $this->Auth->setUser($user);
-                if($user['access'] == 'admin'){
-                return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                $status = $this->user['status'] = 1;
+                $this->Users->save($user);
+                if($user['role'] == 'admin'){
+                    return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
                 } else {
                     return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'indexUser'])); 
                 }
@@ -47,8 +50,7 @@ class UsersController extends AppController
     
     public function index()
     {
-        $this->set('userName', 'teste');
-        if($this->Auth->user('access') == 'admin') {
+        if($this->Auth->user('role') == 'admin') {
             $users = $this->paginate($this->Users);
             $this->set(compact('users'));
             $this->set('_serialize', ['users']);
@@ -73,13 +75,23 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        
-        $user = $this->Users->get($id, [
-            'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut']
-        ]);
+        if($this->Auth->user('role') == 'admin') {
+            $user = $this->Users->get($id, [
+                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut']
+            ]);
+            $this->set('user', $user);
+            $this->set('_serialize', ['user']);
+        } else if($this->Auth->user('role') == 'user' && $this->Auth->user('id') == $id) {
+            $user = $this->Users->get($id, [
+                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut']
+            ]);
 
-        $this->set('user', $user);
-        $this->set('_serialize', ['user']);
+            $this->set('user', $user);
+            $this->set('_serialize', ['user']);
+        } else {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa pagina');
+        }  
     }
 
     /**
@@ -89,19 +101,24 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->Users->newEntity();
-        
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+        if($this->Auth->user()) {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa pagina agora');
+        } else {
+            $user = $this->Users->newEntity();
 
-                return $this->redirect(['action' => 'index']);
+            if ($this->request->is('post')) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+                    $this->Auth->setUser($user); //seta como usuario logado
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->set(compact('user'));
+            $this->set('_serialize', ['user']);
         }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
     }
 
     /**
@@ -113,20 +130,40 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+        if($this->Auth->user('role') == 'admin') {
+            $user = $this->Users->get($id, [
+                'contain' => []
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
-        }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+            $this->set(compact('user'));
+            $this->set('_serialize', ['user']);
+        } else if($this->Auth->user('role') == 'user' && $this->Auth->user('id') == $id) {
+            $user = $this->Users->get($id, [
+                'contain' => []
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('The user has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+            $this->set(compact('user'));
+            $this->set('_serialize', ['user']);
+        } else {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa pagina');
+        }    
     }
 
     /**
@@ -138,14 +175,17 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+        if($this->Auth->user('role') == 'admin' || $this->Auth->user('id') == $id) {
+            $this->request->allowMethod(['post', 'delete']);
+            $user = $this->Users->get($id);
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('The user has been deleted.'));
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
+            return $this->redirect(['action' => 'index']);
         }
-        return $this->redirect(['action' => 'index']);
+        $this->Flash->error(__('Voce nao tem permissao para deletar esse usuario'));
     }
     
     public function beforeFilter(Event $event) {

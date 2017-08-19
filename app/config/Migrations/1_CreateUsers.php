@@ -29,10 +29,13 @@ class CreateUsers extends AbstractMigration
             'limit'=>255,
             'null'=>false
         ]);
-        $table->addColumn('access', 'string', [
+        $table->addColumn('role', 'string', [
             'limit'=>20,
             'null'=>true,
             'default'=>'user'
+        ]);
+        $table->addColumn('status', 'boolean',[
+            'default'=>0
         ]);
         $table->addColumn('created', 'datetime');
         $table->addColumn('modified', 'datetime');

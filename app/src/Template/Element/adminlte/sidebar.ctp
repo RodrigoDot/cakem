@@ -6,17 +6,22 @@
     <div class="pull-left image">
       <?php
             echo $this->Html->image(
-                //'TwitterBootstrap.user2-160x160.jpg',
+                //'TwitterBootstrap.user2-160x160.jpg', user image
                 ['class'=>'img-circle',  "alt"=>"User Image"]
             );
         ?>
 </div>
 <div class="pull-left info">
     <p>
-        <?= $Auth->user('name') ?>
-    </p>
     <!-- Status -->
-    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+    <?php
+        if(!$Auth->user()) {
+            echo "<a href='#'></a>";
+        } else {
+            echo "<a href='#'><i class='fa fa-circle text-success'></i> " . $Auth->user('name') . "</a>";
+        }
+    ?>    
+    </p>
 </div>
 </div>
 

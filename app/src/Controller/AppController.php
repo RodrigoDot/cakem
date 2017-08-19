@@ -52,7 +52,7 @@ class AppController extends Controller
                 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        
+        $this->loadComponent('RouterValidator');
         
         
         /*
@@ -63,9 +63,9 @@ class AppController extends Controller
         //$this->loadComponent('Csrf');
         
         $this->viewBuilder()->theme('TwitterBootstrap');
-        $this->viewBuilder()->layout('adminlte');
+        $this->viewBuilder()->layout('adminlte');        
     }
-
+    
     /**
      * Before render callback.
      *

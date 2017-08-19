@@ -30,12 +30,12 @@
                 <?= $this->Form->create($user) ?>
                 <fieldset>
                     <?php
-                                    echo $this->Form->input('name');
-                                    echo $this->Form->input('username');
-                                    echo $this->Form->input('email');
-                                    echo $this->Form->input('password');
-                                    echo $this->Form->input('access');
-                                ?>
+                        echo $this->Form->input('name');
+                        echo $this->Form->input('username');
+                        echo $this->Form->input('email');
+                        echo $this->Form->input('password');
+                        echo $this->Form->input('access');
+                    ?>
                 </fieldset>
                 <?= $this->Form->button(__('Submit')) ?>
                 <?= $this->Form->end() ?>

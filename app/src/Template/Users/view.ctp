@@ -16,45 +16,6 @@
                 <li>
                     <?= $this->Html->link(__('List {0}', ['Users']), ['action' => 'index']) ?>
                 </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['User']), ['action' => 'add']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('List {0}', ['Categories']), ['controller' => 'Categories', 'action' => 'index']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['Category']), ['controller' => 'Categories', 'action' => 'add']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('List {0}', ['Categories Products']), ['controller' => 'CategoriesProducts', 'action' => 'index']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['Categories Product']), ['controller' => 'CategoriesProducts', 'action' => 'add']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('List {0}', ['Products']), ['controller' => 'Products', 'action' => 'index']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['Product']), ['controller' => 'Products', 'action' => 'add']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('List {0}', ['Stock']), ['controller' => 'Stock', 'action' => 'index']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['Stock']), ['controller' => 'Stock', 'action' => 'add']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('List {0}', ['Stock In']), ['controller' => 'StockIn', 'action' => 'index']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['Stock In']), ['controller' => 'StockIn', 'action' => 'add']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('List {0}', ['Stock Out']), ['controller' => 'StockOut', 'action' => 'index']) ?>
-                </li>
-                <li>
-                    <?= $this->Html->link(__('New {0}', ['Stock Out']), ['controller' => 'StockOut', 'action' => 'add']) ?>
-                </li>
             </ul>
         </div>
     </div>
@@ -94,7 +55,7 @@
                     <tr>
                         <th>Access</th>
                         <td>
-                            <?= h($user->access) ?>
+                            <?= 'kjudsfhjklsweygfhjktf' . h($user->access) ?>
                         </td>
                     </tr>
                     <tr>
