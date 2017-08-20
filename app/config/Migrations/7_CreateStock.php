@@ -13,17 +13,7 @@ class CreateStock extends AbstractMigration
     public function change()
     {
         $table = $this->table('stock');
-        $table->addColumn('user_id', 'integer');
         $table->addColumn('product_id', 'integer');
-        $table->addColumn('decimal', 'integer');
-        $table->addColumn('unit_price', 'decimal', [
-            'precision'=>11,
-            'scale'=>2
-        ]);
-        $table->addColumn('unit_cost', 'decimal', [
-            'precision'=>11,
-            'scale'=>2
-        ]);
         $table->addColumn('created', 'datetime');
         $table->addColumn('modified', 'datetime');
         $table->addForeignKey('product_id', 'products', 'id');

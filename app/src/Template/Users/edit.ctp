@@ -12,6 +12,8 @@
                     )
                 ?></li>
                         <li><?= $this->Html->link(__('List {0}', 'Users'), ['action' => 'index']) ?></li>
+                        <li><?= $this->Html->link(__('List {0}', 'Adress'), ['controller' => 'Adress', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('New {0}', 'Adres'), ['controller' => 'Adress', 'action' => 'add']) ?></li>
                         <li><?= $this->Html->link(__('List {0}', 'Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('New {0}', 'Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
                         <li><?= $this->Html->link(__('List {0}', 'Categories Products'), ['controller' => 'CategoriesProducts', 'action' => 'index']) ?></li>
@@ -38,65 +40,12 @@
                     <?php
                                     echo $this->Form->input('name');
                                     echo $this->Form->input('username');
-                                    echo $this->Form->input('password');
                                     echo $this->Form->input('email');
-                                    echo $this->Form->input('access');
+                                    echo $this->Form->input('password');
+                                    echo $this->Form->input('role');
+                                    echo $this->Form->input('status');
                                 ?>
                 </fieldset>
-                <fieldset id='endereco'> 
-                   <?= $this->Form->label('endereco 1') ?> 
-                    <?= $this->Form->control('nome_endereco', [
-                        'type'=>'text',
-                        'label'=>'nome do endereco',
-                        'name'=>'nome_endereco',
-                        'id'=>'nome_endereco',
-                        'maxlength'=>'60'
-                    ]) ?>          
-                    <?= $this->Form->control('cep', [
-                        'type'=>'text',
-                        'name'=>'cep',
-                        'id'=>'cep',
-                        'value'=>'',
-                        'maxlength'=>'9'
-                    ]) ?>
-                    <?= $this->Form->control('rua', [
-                        'type'=>'text',
-                        'name'=>'rua',
-                        'id'=>'rua'
-                    ]) ?>
-                    <?= $this->Form->control('numero', [
-                        'type'=>'text',
-                        'name'=>'numero',
-                        'type'=>'number',
-                        'id'=>'numero'
-                    ]) ?>
-                    <?= $this->Form->control('bairro', [
-                        'type'=>'text',
-                        'name'=>'bairro',
-                        'id'=>'bairro'
-                    ]) ?>
-                    <?= $this->Form->control('cidade', [
-                        'type'=>'text',
-                        'name'=>'cidade',
-                        'id'=>'cidade'
-                    ]) ?>
-                    <?= $this->Form->control('uf', [
-                        'type'=>'text',
-                        'name'=>'uf',
-                        'id'=>'uf'
-                    ]) ?>
-                    <?= $this->Form->control('ibge', [
-                        'type'=>'text',
-                        'name'=>'ibge',
-                        'id'=>'ibge'
-                    ]) ?>
-                </fieldset>
-                <?= $this->Form->control('+ endereco', [
-                    'type'=>'text',
-                    'type'=>'button',
-                    'label'=>'',
-                    'id'=>'newAdress'
-                ]) ?>
                 <?= $this->Form->button(__('Submit')) ?>
                 <?= $this->Form->end() ?>
             </div>

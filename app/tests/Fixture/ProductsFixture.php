@@ -56,8 +56,8 @@ class ProductsFixture extends TestFixture
             'status' => 1,
             'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'alert_price' => 1,
-            'created' => '2017-08-09 22:22:39',
-            'modified' => '2017-08-09 22:22:39'
+            'created' => '2017-08-20 11:35:53',
+            'modified' => '2017-08-20 11:35:53'
         ],
     ];
 }

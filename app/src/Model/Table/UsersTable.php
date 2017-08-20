@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property \App\Model\Table\AdressTable|\Cake\ORM\Association\HasMany $Adress
  * @property \App\Model\Table\CategoriesTable|\Cake\ORM\Association\HasMany $Categories
  * @property \App\Model\Table\CategoriesProductsTable|\Cake\ORM\Association\HasMany $CategoriesProducts
  * @property \App\Model\Table\ProductsTable|\Cake\ORM\Association\HasMany $Products
@@ -45,6 +46,9 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('Adress', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Categories', [
             'foreignKey' => 'user_id'
         ]);
@@ -86,16 +90,21 @@ class UsersTable extends Table
             ->notEmpty('username');
 
         $validator
-            ->allowEmpty('password');
-
-        $validator
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmpty('email');
 
         $validator
-            ->requirePresence('role', 'create')
-            ->notEmpty('role');
+            ->requirePresence('password', 'create')
+            ->notEmpty('password');
+
+        $validator
+            ->allowEmpty('role');
+
+        $validator
+            ->boolean('status')
+            ->requirePresence('status', 'create')
+            ->notEmpty('status');
 
         return $validator;
     }

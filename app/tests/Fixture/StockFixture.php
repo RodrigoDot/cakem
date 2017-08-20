@@ -59,8 +59,8 @@ class StockFixture extends TestFixture
             'decimal' => 1,
             'unit_price' => 1.5,
             'unit_cost' => 1.5,
-            'created' => '2017-08-09 22:23:14',
-            'modified' => '2017-08-09 22:23:14'
+            'created' => '2017-08-20 11:41:44',
+            'modified' => '2017-08-20 11:41:44'
         ],
     ];
 }

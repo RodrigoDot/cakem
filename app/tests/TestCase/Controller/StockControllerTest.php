@@ -18,6 +18,7 @@ class StockControllerTest extends IntegrationTestCase
     public $fixtures = [
         'app.stock',
         'app.users',
+        'app.adress',
         'app.categories',
         'app.products',
         'app.stock_in',

@@ -10,12 +10,14 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property int $id
  * @property string $name
  * @property string $username
- * @property string $password
  * @property string $email
- * @property string $access
+ * @property string $password
+ * @property string $role
+ * @property bool $status
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
+ * @property \App\Model\Entity\Adres[] $adress
  * @property \App\Model\Entity\Category[] $categories
  * @property \App\Model\Entity\CategoriesProduct[] $categories_products
  * @property \App\Model\Entity\Product[] $products
@@ -47,7 +49,7 @@ class User extends Entity
      */
     protected $_hidden = [
         'password'
-    ];
+    ];    
     
     protected function _setPassword($password) {
         return (new DefaultPasswordHasher)->hash($password);

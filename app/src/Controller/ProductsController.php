@@ -53,25 +53,20 @@ class ProductsController extends AppController
      */
     public function add()
     {
-        if($this->Auth->user('role') == 'admin') {
-            $product = $this->Products->newEntity();
-            if ($this->request->is('post')) {
-                $product = $this->Products->patchEntity($product, $this->request->getData());
-                if ($this->Products->save($product)) {
-                    $this->Flash->success(__('The product has been saved.'));
+        $product = $this->Products->newEntity();
+        if ($this->request->is('post')) {
+            $product = $this->Products->patchEntity($product, $this->request->getData());
+            if ($this->Products->save($product)) {
+                $this->Flash->success(__('The product has been saved.'));
 
-                    return $this->redirect(['action' => 'index']);
-                }
-                $this->Flash->error(__('The product could not be saved. Please, try again.'));
+                return $this->redirect(['action' => 'index']);
             }
-            $users = $this->Products->Users->find('list', ['limit' => 200]);
-            $categories = $this->Products->Categories->find('list', ['limit' => 200]);
-            $this->set(compact('product', 'users', 'categories'));
-            $this->set('_serialize', ['product']);
-        } else {
-            $this->Flash->error('Voce nao tem permissao para acessar essa area');
-            $this->redirect('/users/indexUser');
+            $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
+        $users = $this->Products->Users->find('list', ['limit' => 200]);
+        $categories = $this->Products->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('product', 'users', 'categories'));
+        $this->set('_serialize', ['product']);
     }
 
     /**

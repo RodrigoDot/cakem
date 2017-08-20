@@ -23,6 +23,9 @@ class Adress extends AbstractMigration
         $table->addColumn('rua', 'text', [
             'limit'=>60
         ]);
+        $table->addColumn('numero', 'integer', [
+            'limit'=>10
+        ]);
         $table->addColumn('bairro', 'text', [
             'limit'=>40
         ]);

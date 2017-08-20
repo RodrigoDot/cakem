@@ -19,7 +19,6 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-    
     public function initialize() {
         parent::initialize();
     }
