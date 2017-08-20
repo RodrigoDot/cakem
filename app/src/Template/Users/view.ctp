@@ -53,9 +53,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Access</th>
+                        <th>Role</th>
                         <td>
-                            <?= 'kjudsfhjklsweygfhjktf' . h($user->access) ?>
+                            <?= h($user->role) ?>
                         </td>
                     </tr>
                     <tr>

@@ -13,6 +13,10 @@ class Adress extends AbstractMigration
     public function change()
     {
         $table = $this->table('adress');
+        $table->addColumn('user_id', 'integer');
+        $table->addColumn('nome_endereco', 'text', [
+            'limit'=>60
+        ]);
         $table->addColumn('cep', 'text', [
             'limit'=>9
         ]);
@@ -25,7 +29,7 @@ class Adress extends AbstractMigration
         $table->addColumn('cidade', 'text', [
             'limit'=>40
         ]);
-        $table->addColumn('uf', 'integer', [
+        $table->addColumn('uf', 'text', [
             'limit'=>2
         ]);
         $table->addColumn('ibge', 'text', [

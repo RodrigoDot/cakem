@@ -94,8 +94,8 @@ class UsersTable extends Table
             ->notEmpty('email');
 
         $validator
-            ->requirePresence('access', 'create')
-            ->notEmpty('access');
+            ->requirePresence('role', 'create')
+            ->notEmpty('role');
 
         return $validator;
     }

@@ -69,13 +69,10 @@
                                 <?= $this->Paginator->sort('username') ?>
                             </th>
                             <th>
-                                <?= $this->Paginator->sort('password') ?>
-                            </th>
-                            <th>
                                 <?= $this->Paginator->sort('email') ?>
                             </th>
                             <th>
-                                <?= $this->Paginator->sort('access') ?>
+                                <?= $this->Paginator->sort('role') ?>
                             </th>
                             <th>
                                 <?= $this->Paginator->sort('created') ?>
@@ -98,13 +95,10 @@
                                 <?= h($user->username) ?>
                             </td>
                             <td>
-                                <?= h($user->password) ?>
-                            </td>
-                            <td>
                                 <?= h($user->email) ?>
                             </td>
                             <td>
-                                <?= h($user->access) ?>
+                                <?= h($user->role) ?>
                             </td>
                             <td>
                                 <?= h($user->created) ?>

@@ -53,7 +53,7 @@ class ProductsController extends AppController
      */
     public function add()
     {
-        if($this->Auth->user('access') == 'admin') {
+        if($this->Auth->user('role') == 'admin') {
             $product = $this->Products->newEntity();
             if ($this->request->is('post')) {
                 $product = $this->Products->patchEntity($product, $this->request->getData());
