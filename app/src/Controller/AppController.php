@@ -54,6 +54,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('RouterValidator');
         
+                
         
         /*
          * Enable the following components for recommended CakePHP security settings.

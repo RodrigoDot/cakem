@@ -25,13 +25,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
+    
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    
+    <?= $this->Html->script(['jquery-3.1.1.min.js', 'cep.js']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?= $this->fetch('jquery-3.1.1.min') ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">

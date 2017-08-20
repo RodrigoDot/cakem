@@ -35,8 +35,6 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if($user) {
                 $this->Auth->setUser($user);
-                $user = $this->Users->patchEntity($user, $this->request->getData());
-                $status = $this->user['status'] = 1;
                 $this->Users->save($user);
                 if($user['role'] == 'admin'){
                     return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
@@ -111,8 +109,9 @@ class UsersController extends AppController
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
-                    $this->Auth->setUser($user); //seta como usuario logado
-                    return $this->redirect(['action' => 'index']);
+                    var_dump($user);
+                    //$this->Auth->setUser($user); //seta como usuario logado
+                    //return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
