@@ -33,9 +33,8 @@ class AdressController extends AppController
             $this->paginate = [
                 'contain' => ['Users']
             ];
-            $adress = $this->Adress->get($userId, [
-                'contain' => ['user_id'=>$userId]
-            ]);
+            $adress = $this->Adress->find('all', array('conditions' => array('user_id' => $userId)));
+            $this->paginate($adress);
             $this->set(compact('adress'));
             $this->set('_serialize', ['adress']);    
             }
