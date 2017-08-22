@@ -30,7 +30,9 @@
                 <?= $this->Form->create($adres) ?>
                     <fieldset>
                         <?php
-                        echo $this->Form->input('user_id', ['options' => $users]);
+                        echo $this->Form->hidden('user_id', [
+                            'value' => $Auth->user('id')
+                        ]);
                         echo $this->Form->input('nome_endereco', [
                             'type'=>'text'
                         ]);

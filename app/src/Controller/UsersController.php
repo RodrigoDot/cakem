@@ -28,22 +28,37 @@ class UsersController extends AppController
         return $this->redirect($this->Auth->logout());
     }
     
-    
     public function login () {
+        if($this->Auth->user()) {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->success('Voce ja esta logado');
+        }
         if($this->request->is('post')) {
             $user = $this->Auth->identify();
             if($user) {
+                var_dump($user);
+                $this->Users->updateAll(
+                    array('status' => 0),
+                    array('id' => $this->Auth->user('id'))
+                );
+                echo '</br>';
+                echo '</br>';
+                echo '</br>';
+                echo '</br>';
+                var_dump($user);
+                /*
                 $this->Auth->setUser($user);
                 if($user['role'] == 'admin'){
-                    return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
+                    $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
                 } else {
                     return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'indexUser'])); 
                 }
+                */
             }
             $this->Flash->error('Nao foi possivel fazer login, usuario ou senha invalidos');
         }
     }    
-    
+   
     public function index()
     {
         if($this->Auth->user('role') == 'admin') {
@@ -73,7 +88,7 @@ class UsersController extends AppController
     {
         if($this->Auth->user('role') == 'admin') {
             $user = $this->Users->get($id, [
-                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut', 'Adress']
+                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'StockIn', 'StockOut', 'Adress']
             ]);
             $this->set('user', $user);
             $this->set('_serialize', ['user']);
@@ -105,9 +120,7 @@ class UsersController extends AppController
 
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
-                var_dump($user);
                 if ($this->Users->save($user)) {
-                    var_dump($user);
                   $this->Flash->success(__('The user has been saved.'));
                     $this->Auth->setUser($user); //seta como usuario logado
                     return $this->redirect(['action' => 'index']);
