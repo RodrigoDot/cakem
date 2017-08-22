@@ -9,7 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Stock Model
  *
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ProductsTable|\Cake\ORM\Association\BelongsTo $Products
  *
  * @method \App\Model\Entity\Stock get($primaryKey, $options = [])
@@ -41,10 +40,6 @@ class StockTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Products', [
             'foreignKey' => 'product_id',
             'joinType' => 'INNER'
@@ -63,21 +58,6 @@ class StockTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->integer('decimal')
-            ->requirePresence('decimal', 'create')
-            ->notEmpty('decimal');
-
-        $validator
-            ->decimal('unit_price')
-            ->requirePresence('unit_price', 'create')
-            ->notEmpty('unit_price');
-
-        $validator
-            ->decimal('unit_cost')
-            ->requirePresence('unit_cost', 'create')
-            ->notEmpty('unit_cost');
-
         return $validator;
     }
 
@@ -90,7 +70,6 @@ class StockTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['product_id'], 'Products'));
 
         return $rules;

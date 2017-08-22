@@ -24,12 +24,9 @@
                     <thead>
                         <tr>
                                         <th><?= $this->Paginator->sort('id') ?></th>
-                                        <th><?= $this->Paginator->sort('user_id') ?></th>
                                         <th><?= $this->Paginator->sort('product_id') ?></th>
-                                        <th><?= $this->Paginator->sort('decimal') ?></th>
-                                        <th><?= $this->Paginator->sort('unit_price') ?></th>
-                                        <th><?= $this->Paginator->sort('unit_cost') ?></th>
                                         <th><?= $this->Paginator->sort('created') ?></th>
+                                        <th><?= $this->Paginator->sort('modified') ?></th>
                                         <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                     </thead>
@@ -37,12 +34,9 @@
                         <?php foreach ($stock as $stock): ?>
                         <tr>
                                         <td><?= $this->Number->format($stock->id) ?></td>
-                                        <td><?= $stock->has('user') ? $this->Html->link($stock->user->name, ['controller' => 'Users', 'action' => 'view', $stock->user->id]) : '' ?></td>
                                         <td><?= $stock->has('product') ? $this->Html->link($stock->product->title, ['controller' => 'Products', 'action' => 'view', $stock->product->id]) : '' ?></td>
-                                        <td><?= $this->Number->format($stock->decimal) ?></td>
-                                        <td><?= $this->Number->format($stock->unit_price) ?></td>
-                                        <td><?= $this->Number->format($stock->unit_cost) ?></td>
                                         <td><?= h($stock->created) ?></td>
+                                        <td><?= h($stock->modified) ?></td>
                                         <td class="actions" style="white-space:nowrap">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $stock->id], ['class'=>'btn btn-default btn-xs']) ?>
                                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stock->id], ['class'=>'btn btn-primary btn-xs']) ?>

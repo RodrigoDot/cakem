@@ -24,28 +24,12 @@
             <div class="box-body">
                 <table class="table table-striped table-hover">
                                                         <tr>
-                        <th>User</th>
-                        <td><?= $stock->has('user') ? $this->Html->link($stock->user->name, ['controller' => 'Users', 'action' => 'view', $stock->user->id]) : '' ?></td>
-                    </tr>
-                                                        <tr>
                         <th>Product</th>
                         <td><?= $stock->has('product') ? $this->Html->link($stock->product->title, ['controller' => 'Products', 'action' => 'view', $stock->product->id]) : '' ?></td>
                     </tr>
                                                                                 <tr>
                         <th>Id</th>
                         <td><?= $this->Number->format($stock->id) ?></td>
-                    </tr>
-                                <tr>
-                        <th>Decimal</th>
-                        <td><?= $this->Number->format($stock->decimal) ?></td>
-                    </tr>
-                                <tr>
-                        <th>Unit Price</th>
-                        <td><?= $this->Number->format($stock->unit_price) ?></td>
-                    </tr>
-                                <tr>
-                        <th>Unit Cost</th>
-                        <td><?= $this->Number->format($stock->unit_cost) ?></td>
                     </tr>
                                                                     <tr>
                         <th>Created</th>

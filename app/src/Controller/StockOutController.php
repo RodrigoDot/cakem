@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * StockOut Controller
@@ -18,8 +19,17 @@ class StockOutController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
+    public function initialize() {
+        parent::initialize();
+    }
+    
     public function index()
     {
+        if($this->Auth->user('role') !== 'admin') {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa area');
+        }
         $this->paginate = [
             'contain' => ['Users', 'Products']
         ];
@@ -38,6 +48,10 @@ class StockOutController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('role') !== 'admin') {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa area');
+        }
         $stockOut = $this->StockOut->get($id, [
             'contain' => ['Users', 'Products']
         ]);
@@ -76,6 +90,8 @@ class StockOutController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
+    
+    /**METODO DESATIVADO 
     public function edit($id = null)
     {
         $stockOut = $this->StockOut->get($id, [
@@ -95,7 +111,7 @@ class StockOutController extends AppController
         $this->set(compact('stockOut', 'users', 'products'));
         $this->set('_serialize', ['stockOut']);
     }
-
+    */
     /**
      * Delete method
      *
@@ -103,6 +119,8 @@ class StockOutController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    
+    /** METODO DESATIVADO
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -115,4 +133,5 @@ class StockOutController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    */
 }

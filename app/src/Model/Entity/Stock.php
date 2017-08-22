@@ -7,11 +7,7 @@ use Cake\ORM\Entity;
  * Stock Entity
  *
  * @property int $id
- * @property int $user_id
  * @property int $product_id
- * @property int $decimal
- * @property float $unit_price
- * @property float $unit_cost
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *

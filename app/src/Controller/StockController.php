@@ -18,6 +18,15 @@ class StockController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
+    public function initialize() {
+        parent::initialize();
+        if($this->Auth->user('role') !== 'admin') {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa area');
+        }
+    }
+    
     public function index()
     {
         $this->paginate = [

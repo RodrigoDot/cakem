@@ -18,6 +18,16 @@ class CategoriesProductsController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
+    public function initialize() {
+        parent::initialize();
+        $action = $this->request->param('action');
+        if($this->Auth->user('role') !== 'admin' && $action !== 'index') {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa area');
+        }
+    }
+    
     public function index()
     {
         $this->paginate = [

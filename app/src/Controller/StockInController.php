@@ -18,6 +18,15 @@ class StockInController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
+    public function initialize() {
+        parent::initialize();
+        if($this->Auth->user('role') !== 'admin') {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa area');
+        }
+    }
+    
     public function index()
     {
         $this->paginate = [
@@ -76,6 +85,8 @@ class StockInController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
+    
+    /** METODO DESATIVADO
     public function edit($id = null)
     {
         $stockIn = $this->StockIn->get($id, [
@@ -95,7 +106,8 @@ class StockInController extends AppController
         $this->set(compact('stockIn', 'users', 'products'));
         $this->set('_serialize', ['stockIn']);
     }
-
+    */
+    
     /**
      * Delete method
      *
@@ -103,6 +115,7 @@ class StockInController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    /** METODO DESATIVADO
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -115,4 +128,5 @@ class StockInController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    */
 }

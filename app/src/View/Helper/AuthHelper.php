@@ -7,7 +7,7 @@ use Cake\View\View;
 /**
  * AuthView helper
  */
-class AuthViewHelper extends Helper
+class AuthHelper extends Helper
 {
 
     /**
@@ -17,4 +17,9 @@ class AuthViewHelper extends Helper
      */
     protected $_defaultConfig = [];
     
+    
+    
 }
+
+
+

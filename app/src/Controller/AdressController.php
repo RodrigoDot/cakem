@@ -20,14 +20,39 @@ class AdressController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $adress = $this->paginate($this->Adress);
+        if($this->Auth->user('role') === 'admin') {
+            $this->paginate = [
+                'contain' => ['Users']
+            ];
+            $adress = $this->paginate($this->Adress);
 
-        $this->set(compact('adress'));
-        $this->set('_serialize', ['adress']);
+            $this->set(compact('adress'));
+            $this->set('_serialize', ['adress']);
+        } else {
+            $userId = $this->Auth->user('id');
+            $this->paginate = [
+                'contain' => ['Users']
+            ];
+            $adress = $this->Adress->get($userId, [
+                'contain' => ['user_id'=>$userId]
+            ]);
+            $this->set(compact('adress'));
+            $this->set('_serialize', ['adress']);    
+            }
     }
+    
+    
+    /**
+    
+        // Using a query
+        $comments = $this->paginate($commentsTable->find());
+
+        // Using the model name.
+        $comments = $this->paginate('Comments');
+
+        // Using a table object.
+        $comments = $this->paginate($commentTable);
+    */
 
     /**
      * View method

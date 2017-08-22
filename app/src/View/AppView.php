@@ -38,6 +38,6 @@ class AppView extends View
     public function initialize()
     {
         $this->LoadHelper('Form', ['className'=>'TwitterBootstrap.Form']); 
-        $this->loadHelper('AuthView');
+        $this->loadHelper('Auth');
     }
 }

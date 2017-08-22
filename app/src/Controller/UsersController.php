@@ -34,7 +34,6 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if($user) {
                 $this->Auth->setUser($user);
-                $this->Users->save($user);
                 if($user['role'] == 'admin'){
                     return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
                 } else {
@@ -74,13 +73,13 @@ class UsersController extends AppController
     {
         if($this->Auth->user('role') == 'admin') {
             $user = $this->Users->get($id, [
-                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut']
+                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut', 'Adress']
             ]);
             $this->set('user', $user);
             $this->set('_serialize', ['user']);
         } else if($this->Auth->user('role') == 'user' && $this->Auth->user('id') == $id) {
             $user = $this->Users->get($id, [
-                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'Stock', 'StockIn', 'StockOut']
+                'contain' => ['Categories', 'CategoriesProducts', 'Products', 'StockIn', 'StockOut', 'Adress']
             ]);
 
             $this->set('user', $user);

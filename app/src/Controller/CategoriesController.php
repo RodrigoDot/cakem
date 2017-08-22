@@ -18,6 +18,16 @@ class CategoriesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
+    public function initialize() {
+        parent::initialize();
+        $action = $this->request->param('action');
+        if($this->Auth->user('role') !== 'admin' && $action !== 'index') {
+            $this->redirect(['controller'=>'users', 'action'=>'index']);
+            $this->Flash->error('Voce nao pode acessar essa area');
+        }
+    }
+    
     public function index()
     {
         $this->paginate = [
@@ -38,7 +48,6 @@ class CategoriesController extends AppController
      */
     public function view($id = null)
     {
-        $access = $this->RouterValidator->validate($this->Auth->user('role'));
         if($access) {
             $category = $this->Categories->get($id, [
                 'contain' => ['Users', 'Products']
@@ -59,7 +68,6 @@ class CategoriesController extends AppController
      */
     public function add()
     {
-        $access = $this->RouterValidator->validate($this->Auth->user('role'));
         if($access) {
             $category = $this->Categories->newEntity();
             if ($this->request->is('post')) {
@@ -90,7 +98,6 @@ class CategoriesController extends AppController
      */
     public function edit($id = null)
     {
-        $access = $this->RouterValidator->validate($this->Auth->user('role'));
         if($access) {
             $category = $this->Categories->get($id, [
                 'contain' => ['Products']
@@ -123,7 +130,6 @@ class CategoriesController extends AppController
      */
     public function delete($id = null)
     {
-        $access = $this->RouterValidator->validate($this->Auth->user('role'));
         if($access) {
             $this->request->allowMethod(['post', 'delete']);
             $category = $this->Categories->get($id);
@@ -138,11 +144,5 @@ class CategoriesController extends AppController
             $this->redirect(['controller'=>'users', 'action'=>'index']);
             $this->Flash->error('Voce nao tem permissao para acessar essa pagina');
         }
-    }
-    
-    public function beforeRender() {
-        $this->Auth->isAuthorized();
-    }
-    
-    
+    }    
 }
