@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Adress extends AbstractMigration
+class CreateAdress extends AbstractMigration
 {
     /**
      * Change Method.

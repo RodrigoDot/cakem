@@ -19,11 +19,18 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    
     public function initialize() {
         parent::initialize();
     }
     
+    
+    
     public function logout() {
+        $this->Users->updateAll(
+            array('status' => 0),
+            array('id' => $this->Auth->user('id'))
+        );
         $this->Flash->success('Voce nao esta mais logado');
         return $this->redirect($this->Auth->logout());
     }
@@ -35,25 +42,17 @@ class UsersController extends AppController
         }
         if($this->request->is('post')) {
             $user = $this->Auth->identify();
-            if($user) {
-                var_dump($user);
+            if($user) {          
+                $this->Auth->setUser($user);
                 $this->Users->updateAll(
-                    array('status' => 0),
+                    array('status' => 1),
                     array('id' => $this->Auth->user('id'))
                 );
-                echo '</br>';
-                echo '</br>';
-                echo '</br>';
-                echo '</br>';
-                var_dump($user);
-                /*
-                $this->Auth->setUser($user);
                 if($user['role'] == 'admin'){
-                    $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
+                    return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'index'])); 
                 } else {
                     return $this->redirect($this->Auth->redirectUrl(['controller'=>'users', 'action'=>'indexUser'])); 
-                }
-                */
+                }                
             }
             $this->Flash->error('Nao foi possivel fazer login, usuario ou senha invalidos');
         }
