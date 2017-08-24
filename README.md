@@ -1,18 +1,24 @@
 This is my first project using cakephp 3
 
+---
 first thing to do
+---
 
 * initiate the git repository
 * git init
 * git commit -m "first commit"
 
+---
 second thing to do
+---
 
 * initiate the composer repository
 * composer init
 * composer create-project --prefer-dist cakephp/app
 
-thirth thing to do
+---
+third thing to do
+---
 
 * configurate the database connection 
 * go to app\config\app.php
@@ -22,7 +28,9 @@ thirth thing to do
     *password
     *database
 
+---
 forth thing to do
+---
 
 * import the theme on the root directory of the project
 * composer require cakephp-brasil/twitter-bootstrap:dev-master
@@ -31,35 +39,40 @@ forth thing to do
 * go to src\controller\appcontroller.php and add $this->viewBuilder()->theme('TwitterBootstrap');  on the initialize method
 * go to src\controller\appcontroller.php and add $this->viewBuilder()->layout('adminlte'); on the initialize method
 
+---
 fifth thing to do 
+---
 
 * ativate the layout
 * run this on console bin\cake TwitterBootstrap.publish all
 * now we have the layout files at src\template\element
 
-_________
-
+___
 sixth thing to do
+---
 
 * initiate the migrations database
 * run bin\cake bake migration TableName to create your tables  
 * go to config\migrations and you will be able to personalize your tables following the rules of Migration's Development
 
-
+---
 seventh thing to do
+---
 
 * generate the files of your migration tables
 * run bin\cake migrations migrate
 * NOW YOU HAVE YOUR DATABASE COMPLETE
 
---------
-
+---
 eighth thing to do 
+---
 
 * now you can run the bake to create your CRUD using bin\cake bake all NOMETATABELA or do it yourself
 * OBS to create your CRUD using the twitterbootstrap you must run bin\cake bake all NOMETATABELA --theme TwitterBootstrap
 
-nineth thing to do
+---
+ninth thing to do
+---
 
 * run the follow code bin\cake i18n extract
 * the cake will catch every sentence into a __() 
@@ -70,7 +83,9 @@ nineth thing to do
 * go to config\app.php
 * on App=>defaultLocale you must edit the filed ex.: pt_BR and put the name of your language
 
-10th thing to do
+---
+tenth thing to do
+---
 
 * to use data from the auth on the views
 
